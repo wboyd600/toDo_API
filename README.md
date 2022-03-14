@@ -7,7 +7,7 @@ This is a proposal for my TODO API
 ### Create TODO
 `POST /add`
 
-request body
+request body:
 ```
 {
     title: String,
@@ -21,7 +21,7 @@ response code:
     
     `201 - Created`
 
-response body
+response body:
 ```
 {
     id: GUID,
@@ -36,6 +36,7 @@ response code:
     
     `400 - Bad Request`
 
+response body:
 ```
 {
     message: String
