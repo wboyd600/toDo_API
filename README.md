@@ -55,7 +55,7 @@ response code:
     
 `    200 - Okay`
 
-response body
+response body:
 ```
 {
     id: "GUID",
@@ -70,7 +70,7 @@ response code:
     
 `    404 - Not Found`
 
-response body
+response body:
 ```
 {
     message: "String"
