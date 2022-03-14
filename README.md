@@ -9,7 +9,7 @@ This is a proposal for my TODO API
 request body
 ```
 {
-    title: "String",
+    title: String,
     createdAt: Date,
     dueAt: Date,
     completed: Bool
