@@ -5,8 +5,11 @@ This is a proposal for my TODO API
 ## End Points
 
 ### Create TODO
+
 Make a post request to the API to create a TODO.
+
 `POST /add`
+
 request body
 ```
 {
@@ -42,7 +45,9 @@ response code:
 
 ### Get a TODO
 Get one TODO
+
 `GET /fetch/{id}`
+
 request body
 ```
 none
