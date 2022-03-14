@@ -11,8 +11,8 @@ request body
 ```
 {
     title: String,
-    createdAt: Date,
-    dueAt: Date,
+    created: Date,
+    due: Date,
     completed: Bool
 }
 ```
@@ -25,8 +25,8 @@ response body
 {
     id: GUID,
     title: String,
-    createdAt: Date,
-    dueAt: Date,
+    created: Date,
+    due: Date,
     completed: Bool
 }
 ```
@@ -41,7 +41,7 @@ response code:
 ```
 
 ### Get a TODO
-`GET /fetch/{id}`
+`GET /todos/{id}`
 
 request body
 ```
@@ -56,8 +56,8 @@ response body
 {
     id: GUID,
     title: String,
-    createdAt: Date,
-    dueAt: Date,
+    created: Date,
+    due: Date,
     completed: Bool
 }
 ```
@@ -70,4 +70,47 @@ response body
 {
     message: String
 }
+```
+
+### Get all TODOs
+`GET /todos/`
+
+URL Parameters
+```
+Name: completed
+Valid values: true, false
+Required: no
+Description: If provided, the api will only return TODOs which have been completed if the given value is `true`. If the value is `false`, the API will only return TODOs which have not been completed.
+
+Name: field
+Valid values: created, due, title
+Required: no
+Description: If provided, the TODOs will be sorted by the URL parameters corresponding value for each TODO. The default order these will be filtered by is descending.
+
+Name: order
+Valid values: asc, desc
+Required: no
+Description: This parameter is used to determine the order in which to arrange the TODOs. This parameter must be used with the field URL parameter.
+```
+
+request body
+```
+none
+```
+
+response code: 
+    200 - Okay
+
+response body
+```
+[
+    {
+        id: GUID,
+        title: String,
+        createdAt: Date,
+        dueAt: Date,
+        completed: Bool
+    },
+    ...
+]
 ```
