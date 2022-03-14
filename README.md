@@ -93,7 +93,7 @@ Required: no
 Description: This parameter is used to determine the order in which to arrange the TODOs. This parameter must be used with the field URL parameter.
 ```
 
-request body
+request body:
 ```
 none
 ```
@@ -101,16 +101,105 @@ none
 response code: 
     200 - Okay
 
-response body
+response body:
 ```
-[
-    {
-        id: GUID,
-        title: String,
-        createdAt: Date,
-        dueAt: Date,
-        completed: Bool
-    },
-    ...
-]
+{
+    [
+        {
+            id: GUID,
+            title: String,
+            createdAt: Date,
+            dueAt: Date,
+            completed: Bool
+        },
+        {
+            id: GUID,
+            title: String,
+            createdAt: Date,
+            dueAt: Date,
+            completed: Bool
+        },
+        ...
+    ]
+}
+```
+
+response code:
+    400 - Bad request
+
+response body:
+```
+{
+    message: String
+}
+```
+
+### Update a TODO
+`PUT /todos/{id}`
+
+request body:
+```
+{
+    id: GUID,
+    title: String,
+    createdAt: Date,
+    dueAt: Date,
+    completed: Bool
+}
+```
+
+response code:
+    200 - Okay
+
+response body:
+```
+{
+    id: GUID,
+    title: String,
+    createdAt: Date,
+    dueAt: Date,
+    completed: Bool
+}
+```
+
+response code:
+   40X - Client error status codes
+
+response body:
+```
+{
+    message: String
+}
+```
+
+### Delete a TODO
+`DELETE /todos/{id}`
+
+request body:
+```
+none
+```
+
+response code:
+    200 - Okay
+
+response body:
+```
+{
+    id: GUID,
+    title: String,
+    createdAt: Date,
+    dueAt: Date,
+    completed: Bool
+}
+```
+
+response code:
+    404 - Not found
+
+response body:
+```
+{
+    message: String
+}
 ```
