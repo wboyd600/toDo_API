@@ -34,7 +34,7 @@ response body:
 
 response code:
     
-    `400 - Bad Request`
+`    400 - Bad Request`
 
 response body:
 ```
