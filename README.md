@@ -38,6 +38,7 @@ response code:
 {
     message: String
 }
+```
 
 ### Get a TODO
 Get one TODO
