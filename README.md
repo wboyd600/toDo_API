@@ -11,8 +11,8 @@ request body:
 ```
 {
     title: String,
-    created: Date,
-    due: Date,
+    created: DateTime,
+    due: DateTime,
     completed: Bool
 }
 ```
@@ -26,8 +26,8 @@ response body:
 {
     id: GUID,
     title: String,
-    created: Date,
-    due: Date,
+    created: DateTime,
+    due: DateTime,
     completed: Bool
 }
 ```
@@ -60,8 +60,8 @@ response body
 {
     id: GUID,
     title: String,
-    created: Date,
-    due: Date,
+    created: DateTime,
+    due: DateTime,
     completed: Bool
 }
 ```
@@ -114,15 +114,15 @@ response body:
         {
             id: GUID,
             title: String,
-            createdAt: Date,
-            dueAt: Date,
+            created: DateTime,
+            due: DateTime,
             completed: Bool
         },
         {
             id: GUID,
             title: String,
-            createdAt: Date,
-            dueAt: Date,
+            created: DateTime,
+            due: DateTime,
             completed: Bool
         },
         ...
@@ -149,8 +149,8 @@ request body:
 {
     id: GUID,
     title: String,
-    createdAt: Date,
-    dueAt: Date,
+    created: DateTime,
+    due: DateTime,
     completed: Bool
 }
 ```
@@ -164,8 +164,8 @@ response body:
 {
     id: GUID,
     title: String,
-    createdAt: Date,
-    dueAt: Date,
+    created: DateTime,
+    due: DateTime,
     completed: Bool
 }
 ```
@@ -198,8 +198,8 @@ response body:
 {
     id: GUID,
     title: String,
-    createdAt: Date,
-    dueAt: Date,
+    created: DateTime,
+    due: DateTime,
     completed: Bool
 }
 ```
