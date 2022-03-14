@@ -1,4 +1,4 @@
-# toDo_API
+# TODO API SPEC
 
 This is a proposal for my TODO API Spec
 
