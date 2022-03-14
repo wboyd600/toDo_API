@@ -18,8 +18,8 @@ request body:
 ```
 
 response code:
-    
-    `201 - Created`
+
+`    201 - Created`
 
 response body:
 ```
@@ -53,7 +53,7 @@ none
 
 response code:
     
-    `200 - Okay`
+`    200 - Okay`
 
 response body
 ```
@@ -68,7 +68,7 @@ response body
 
 response code: 
     
-    `404 - Not Found`
+`    404 - Not Found`
 
 response body
 ```
@@ -105,7 +105,7 @@ none
 
 response code: 
     
-    `200 - Okay`
+`    200 - Okay`
 
 response body:
 ```
@@ -132,7 +132,7 @@ response body:
 
 response code:
     
-    `400 - Bad request`
+`    400 - Bad request`
 
 response body:
 ```
@@ -157,7 +157,7 @@ request body:
 
 response code:
     
-    `200 - Okay`
+`    200 - Okay`
 
 response body:
 ```
@@ -172,7 +172,7 @@ response body:
 
 response code:
    
-   `40X - Client error status codes`
+`   40X - Client error status codes`
 
 response body:
 ```
@@ -191,7 +191,7 @@ none
 
 response code:
     
-    `200 - Okay`
+`    200 - Okay`
 
 response body:
 ```
@@ -206,7 +206,7 @@ response body:
 
 response code:
     
-    `404 - Not found`
+`    404 - Not found`
 
 response body:
 ```
