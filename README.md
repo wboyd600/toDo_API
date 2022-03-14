@@ -10,9 +10,9 @@ This is a proposal for my TODO API Spec
 request body:
 ```
 {
-    title: String,
-    created: DateTime,
-    due: DateTime,
+    title: "String",
+    created: "DateTime",
+    due: "DateTime",
     completed: Bool
 }
 ```
@@ -24,10 +24,10 @@ response code:
 response body:
 ```
 {
-    id: GUID,
-    title: String,
-    created: DateTime,
-    due: DateTime,
+    id: "GUID",
+    title: "String",
+    created: "DateTime",
+    due: "DateTime",
     completed: Bool
 }
 ```
@@ -39,7 +39,7 @@ response code:
 response body:
 ```
 {
-    message: String
+    message: "String"
 }
 ```
 
@@ -58,10 +58,10 @@ response code:
 response body
 ```
 {
-    id: GUID,
-    title: String,
-    created: DateTime,
-    due: DateTime,
+    id: "GUID",
+    title: "String",
+    created: "DateTime",
+    due: "DateTime",
     completed: Bool
 }
 ```
@@ -73,7 +73,7 @@ response code:
 response body
 ```
 {
-    message: String
+    message: "String"
 }
 ```
 
@@ -112,17 +112,17 @@ response body:
 {
     [
         {
-            id: GUID,
-            title: String,
-            created: DateTime,
-            due: DateTime,
+            id: "GUID",
+            title: "String",
+            created: "DateTime",
+            due: "DateTime",
             completed: Bool
         },
         {
-            id: GUID,
-            title: String,
-            created: DateTime,
-            due: DateTime,
+            id: "GUID",
+            title: "String",
+            created: "DateTime",
+            due: "DateTime",
             completed: Bool
         },
         ...
@@ -137,7 +137,7 @@ response code:
 response body:
 ```
 {
-    message: String
+    message: "String"
 }
 ```
 
@@ -147,10 +147,10 @@ response body:
 request body:
 ```
 {
-    id: GUID,
-    title: String,
-    created: DateTime,
-    due: DateTime,
+    id: "GUID",
+    title: "String",
+    created: "DateTime",
+    due: "DateTime",
     completed: Bool
 }
 ```
@@ -162,10 +162,10 @@ response code:
 response body:
 ```
 {
-    id: GUID,
-    title: String,
-    created: DateTime,
-    due: DateTime,
+    id: "GUID",
+    title: "String",
+    created: "DateTime",
+    due: "DateTime",
     completed: Bool
 }
 ```
@@ -177,7 +177,7 @@ response code:
 response body:
 ```
 {
-    message: String
+    message: "String"
 }
 ```
 
@@ -196,10 +196,10 @@ response code:
 response body:
 ```
 {
-    id: GUID,
-    title: String,
-    created: DateTime,
-    due: DateTime,
+    id: "GUID",
+    title: "String",
+    created: "DateTime",
+    due: "DateTime",
     completed: Bool
 }
 ```
@@ -211,6 +211,6 @@ response code:
 response body:
 ```
 {
-    message: String
+    message: "String"
 }
 ```
