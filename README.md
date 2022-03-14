@@ -172,7 +172,7 @@ response body:
 
 response code:
    
-`   40X - Client error status codes`
+`   4XX - Client error status codes`
 
 response body:
 ```
