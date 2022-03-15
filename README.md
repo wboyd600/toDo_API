@@ -11,7 +11,6 @@ request body:
 ```
 {
     title: "String",
-    created: "DateTime",
     due: "DateTime",
     completed: Bool
 }
