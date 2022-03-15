@@ -5,7 +5,7 @@ This is a proposal for my TODO API Spec
 ## End Points
 
 ### Create TODO
-`POST /add`
+`POST /todo`
 
 request body:
 ```
@@ -44,7 +44,7 @@ response body:
 ```
 
 ### Get a TODO
-`GET /todos/{id}`
+`GET /todo/{id}`
 
 request body
 ```
@@ -78,7 +78,7 @@ response body:
 ```
 
 ### Get all TODOs
-`GET /todos/`
+`GET /todo/`
 
 URL Parameters
 ```
@@ -142,7 +142,7 @@ response body:
 ```
 
 ### Update a TODO
-`PUT /todos/{id}`
+`PUT /todo/{id}`
 
 request body:
 ```
@@ -182,7 +182,7 @@ response body:
 ```
 
 ### Delete a TODO
-`DELETE /todos/{id}`
+`DELETE /todo/{id}`
 
 request body:
 ```
