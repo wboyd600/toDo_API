@@ -1,8 +1,6 @@
 using toDo_API.Models;
-using toDo_API.Services;
 using Microsoft.AspNetCore.Mvc;
 using toDo_API.Repositories;
-
 namespace toDo_API.Controllers;
 
 [ApiController]
