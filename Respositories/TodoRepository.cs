@@ -44,9 +44,18 @@ namespace toDo_API.Repositories
             return todos.ContainsKey(index) ? todos[index] : null;
         }
 
-        public Todo Update(Guid index, Todo entity)
+        public Todo? Update(Guid index, Todo entity)
         {
-            throw new NotImplementedException();
+            var result = Get(index);
+
+            if (result != null) {
+                result.Title = entity.Title;
+                result.Id = entity.Id;
+                result.Due = entity.Due;
+                result.Completed = entity.Completed;
+            }
+
+            return result;
         }
     }
 }

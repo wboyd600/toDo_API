@@ -43,16 +43,12 @@ public class TodoController : ControllerBase
     [HttpPut("{id}")]
     public IActionResult Update(Guid id, Todo todo)
     {
-        if (id != todo.Id)
-            return BadRequest();
+        var result = _todoRepository.Update(id, todo);
 
-        var existingTodo = TodoService.GetTodo(id);
-        if (existingTodo is null)
+        if (result is null)
             return NotFound();
-        
-        TodoService.Update(todo);
 
-        return NoContent();
+        return Ok(todo);
     }
 
     [HttpDelete("{id}")]

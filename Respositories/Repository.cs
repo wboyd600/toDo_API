@@ -15,7 +15,7 @@ namespace toDo_API.Repositories
         IEnumerable<TEntity> All();
         TEntity? Get(TIndex index);
         TEntity Create(TEntity entity);
-        TEntity Update(TIndex index, TEntity entity);
+        TEntity? Update(TIndex index, TEntity entity);
         TEntity? Delete(TIndex index);
     }
 }
