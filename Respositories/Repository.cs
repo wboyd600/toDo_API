@@ -1,4 +1,5 @@
 using System.Linq.Expressions;
+using toDo_API.Models;
 
 namespace toDo_API.Repositories
 {
@@ -10,6 +11,7 @@ namespace toDo_API.Repositories
     public interface IRepository<TEntity, TIndex>
         where TEntity: IEntity<TIndex>
     {
+        public static IDictionary<Guid, Todo>? todos { get; set; }
         IEnumerable<TEntity> All();
         TEntity? Get(params object[] values);
         TEntity Create(TEntity entity);

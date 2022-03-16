@@ -11,4 +11,3 @@ namespace toDo_API.Models
         public bool Completed { get; set; }
     }
 }
-

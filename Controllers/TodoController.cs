@@ -34,10 +34,10 @@ public class TodoController : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult Create(Todo todo)
+    public IActionResult Create([FromBody]Todo todo)
     {
-        TodoService.Add(todo);
-        return CreatedAtAction(nameof(Create), new { id = todo.Id }, todo);
+        var result = _todoRepository.Create(todo);
+        return CreatedAtAction(nameof(Create), result);
     }
 
     [HttpPut("{id}")]
