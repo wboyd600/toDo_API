@@ -13,9 +13,9 @@ namespace toDo_API.Repositories
     {
         public static IDictionary<Guid, Todo>? todos { get; set; }
         IEnumerable<TEntity> All();
-        TEntity? Get(params object[] values);
+        TEntity? Get(TIndex index);
         TEntity Create(TEntity entity);
         TEntity Update(TIndex index, TEntity entity);
-        TEntity Delete(TIndex index);
+        TEntity? Delete(TIndex index);
     }
 }

@@ -29,14 +29,19 @@ namespace toDo_API.Repositories
             return todos[newId];
         }
 
-        public Todo Delete(Guid index)
+        public Todo? Delete(Guid index)
         {
-            throw new NotImplementedException();
+            var result = Get(index);
+
+            if (result != null) {
+                todos.Remove(index);
+            }
+            
+            return result;
         }
 
-        public Todo? Get(params object[] values) {
-            Console.WriteLine(values);
-            throw new NotImplementedException();
+        public Todo? Get(Guid index) {
+            return todos.ContainsKey(index) ? todos[index] : null;
         }
 
         public Todo Update(Guid index, Todo entity)

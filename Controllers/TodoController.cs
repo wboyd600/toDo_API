@@ -25,12 +25,12 @@ public class TodoController : ControllerBase
 
     [HttpGet("{id}")]
     public ActionResult<Todo> Get(Guid id) {
-        var todo = TodoService.GetTodo(id);
+        var todo = _todoRepository.Get(id);
 
         if (todo is null)
             return NotFound();
 
-        return todo;
+        return Ok(todo);
     }
 
     [HttpPost]
@@ -58,13 +58,12 @@ public class TodoController : ControllerBase
     [HttpDelete("{id}")]
     public IActionResult Delete(Guid id)
     {
-        var todo = TodoService.GetTodo(id);
-
-        if (todo is null)
+        var result = _todoRepository.Delete(id);
+        
+        if (result is null) {
             return NotFound();
+        }
 
-        TodoService.Delete(id);
-
-        return NoContent();
+        return Ok(result);
     }
 }
