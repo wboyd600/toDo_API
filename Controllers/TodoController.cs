@@ -1,6 +1,7 @@
 using toDo_API.Models;
 using toDo_API.Services;
 using Microsoft.AspNetCore.Mvc;
+using toDo_API.Repositories;
 
 namespace toDo_API.Controllers;
 
@@ -8,13 +9,19 @@ namespace toDo_API.Controllers;
 [Route("[controller]")]
 public class TodoController : ControllerBase
 {
-    public TodoController()
+    private readonly ITodoRepository _todoRepository;
+    public TodoController(
+        ITodoRepository todoRepository
+    )
     {
+        _todoRepository = todoRepository;
     }
 
     [HttpGet]
-    public ActionResult<List<Todo>> GetAll() =>
-        TodoService.GetAll();
+    public ActionResult<List<Todo>> GetAll() {
+        var results = _todoRepository.All();
+        return results.ToList();
+    }
 
     [HttpGet("{id}")]
     public ActionResult<Todo> Get(Guid id) {

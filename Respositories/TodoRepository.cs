@@ -23,6 +23,7 @@ namespace toDo_API.Repositories
         }
 
         public Todo? Get(params object[] values) {
+            Console.WriteLine(values);
             throw new NotImplementedException();
         }
 
