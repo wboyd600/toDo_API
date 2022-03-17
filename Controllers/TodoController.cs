@@ -16,8 +16,8 @@ public class TodoController : ControllerBase
     }
 
     [HttpGet]
-    public ActionResult<List<Todo>> GetAll() {
-        var results = _todoRepository.All();
+    public async Task<ActionResult<IEnumerable<Todo>>> GetAll() {
+        var results = await _todoRepository.All(todo => true);
         return results.ToList();
     }
 
@@ -32,10 +32,10 @@ public class TodoController : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult Create([FromBody]Todo todo)
+    public async Task<ActionResult<Todo>> Create([FromBody]Todo todo)
     {
-        var result = _todoRepository.Create(todo);
-        return CreatedAtAction(nameof(Create), result);
+        var createdTodo = await _todoRepository.Create(todo);
+        return createdTodo;
     }
 
     [HttpPut("{id}")]

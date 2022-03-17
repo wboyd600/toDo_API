@@ -1,3 +1,4 @@
+using toDo_API.db;
 using toDo_API.Models;
 using toDo_API.Repositories;
 namespace toDo_API
@@ -13,10 +14,12 @@ namespace toDo_API
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            // var config = new ApplicationConfig();
-            // configManager.Bind("Application", config);
+            var config = new ApplicationConfig();
+            configManager.Bind("Application", config);
 
-            // builder.Services.AddScoped<IGenericRepository, GenericRepository>();
+            builder.Services.AddDbContext<ApplicationContext>();
+            builder.Services.AddScoped<ApplicationConfig>(provider => config);
+            builder.Services.AddScoped<IGenericRepository, GenericRepository>();
             builder.Services.AddScoped<ITodoRepository, TodoRepository>();
         }
     }

@@ -12,9 +12,11 @@ namespace toDo_API.Repositories
         where TEntity: IEntity<TIndex>
     {
         public static IDictionary<Guid, Todo>? todos { get; set; }
-        IEnumerable<TEntity> All();
+        Task<IEnumerable<TEntity>> All(
+            Expression<Func<TEntity, bool>> predicate
+        );
         TEntity? Get(TIndex index);
-        TEntity Create(TEntity entity);
+        Task<TEntity> Create(TEntity entity);
         TEntity? Update(TIndex index, TEntity entity);
         TEntity? Delete(TIndex index);
     }

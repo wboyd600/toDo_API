@@ -1,11 +1,22 @@
-
+using System.Linq.Expressions;
+using Microsoft.EntityFrameworkCore;
 using toDo_API.Models;
+using toDo_API.db;
 
 namespace toDo_API.Repositories
 {
     public interface ITodoRepository : IRepository<Todo, Guid> {}
 
     public class TodoRepository : ITodoRepository {
+        private readonly ApplicationContext _context;
+        private DbSet<Todo> _dbSet => _context.Set<Todo>();
+
+        public TodoRepository (
+            ApplicationContext context
+        ) {
+            _context = context;
+        }
+
         public static IDictionary<Guid, Todo> todos = new Dictionary<Guid, Todo>(){
             {
                 Guid.Parse("236cb2ad-d971-4bf1-88c7-3c70b6003fa7"), new Todo {
@@ -17,16 +28,16 @@ namespace toDo_API.Repositories
         }
         };
 
-        public IEnumerable<Todo> All() {
-            return todos.Values.ToList();
+        public async Task<IEnumerable<Todo>> All(Expression<Func<Todo, bool>> predicate)
+        {
+            return await _dbSet.Where(predicate).ToListAsync();
         }
 
-        public Todo Create(Todo entity)
+        public async Task<Todo> Create(Todo entity) 
         {
-            var newId = Guid.NewGuid();
-            entity.Id = newId;
-            todos.Add(newId, entity);
-            return todos[newId];
+            var todo = _dbSet.Add(entity);
+            await _context.SaveChangesAsync();
+            return todo.Entity;
         }
 
         public Todo? Delete(Guid index)

@@ -1,0 +1,11 @@
+{
+  "scripts": {
+    "migrations": "./node_modules/.bin/postgrator -c postgrator.json"
+  },
+  "dependencies": {
+    "install": "^0.13.0",
+    "npm": "^8.5.4",
+    "pg": "^8.7.3",
+    "postgrator-cli": "^5.1.0"
+  }
+}
