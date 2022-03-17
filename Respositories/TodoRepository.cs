@@ -17,17 +17,6 @@ namespace toDo_API.Repositories
             _context = context;
         }
 
-        public static IDictionary<Guid, Todo> todos = new Dictionary<Guid, Todo>(){
-            {
-                Guid.Parse("236cb2ad-d971-4bf1-88c7-3c70b6003fa7"), new Todo {
-                    Id = Guid.Parse("236cb2ad-d971-4bf1-88c7-3c70b6003fa7"),
-                    Title = "Make breaky",
-                    Due = DateTime.Parse("03-15-2022"),
-                    Completed = false
-                }
-        }
-        };
-
         public async Task<IEnumerable<Todo>> All(Expression<Func<Todo, bool>> predicate)
         {
             return await _dbSet.Where(predicate).ToListAsync();
@@ -40,33 +29,26 @@ namespace toDo_API.Repositories
             return todo.Entity;
         }
 
-        public Todo? Delete(Guid index)
+        public async Task<Todo?> Delete(Guid index)
         {
-            var result = Get(index);
+            var result = _dbSet.Remove(new Todo { Id = index });
 
-            if (result != null) {
-                todos.Remove(index);
-            }
-            
-            return result;
+            await _context.SaveChangesAsync();
+
+            return result.Entity;
         }
 
-        public Todo? Get(Guid index) {
-            return todos.ContainsKey(index) ? todos[index] : null;
+         public async Task<Todo?> Get(params object[] values) {
+            return await _dbSet.FindAsync(values);
         }
 
-        public Todo? Update(Guid index, Todo entity)
+        public async Task<Todo?> Update(Guid index, Todo entity)
         {
-            var result = Get(index);
+            entity.Id = index;
+            var todo = _dbSet.Update(entity);
+            await _context.SaveChangesAsync();
 
-            if (result != null) {
-                result.Title = entity.Title;
-                result.Id = entity.Id;
-                result.Due = entity.Due;
-                result.Completed = entity.Completed;
-            }
-
-            return result;
+            return todo.Entity;
         }
     }
 }

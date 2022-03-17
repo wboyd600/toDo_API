@@ -22,8 +22,8 @@ public class TodoController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public ActionResult<Todo> Get(Guid id) {
-        var todo = _todoRepository.Get(id);
+    public async Task<ActionResult<Todo>> Get(Guid id) {
+        var todo = await _todoRepository.Get(id);
 
         if (todo is null)
             return NotFound();
@@ -39,20 +39,21 @@ public class TodoController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public IActionResult Update(Guid id, Todo todo)
+    public async Task<ActionResult<Todo>> Update(Guid id, [FromBody] Todo todo)
     {
-        var result = _todoRepository.Update(id, todo);
+        var updatedTodo = await _todoRepository.Update(id, todo);
 
-        if (result is null)
+        if (updatedTodo is null) {
             return NotFound();
+        }
 
-        return Ok(todo);
+        return updatedTodo;
     }
 
     [HttpDelete("{id}")]
-    public IActionResult Delete(Guid id)
+    public async Task<ActionResult<Todo>> Delete(Guid id)
     {
-        var result = _todoRepository.Delete(id);
+        var result = await _todoRepository.Delete(id);
         
         if (result is null) {
             return NotFound();
