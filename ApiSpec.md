@@ -73,7 +73,7 @@ request body:
 
 response code:
 
-`    201 - Created`
+`201 - Created`
 
 response body:
 ```
@@ -88,7 +88,7 @@ response body:
 
 response code:
     
-`    400 - Bad Request`
+`400 - Bad Request`
 
 response body:
 ```
@@ -112,7 +112,7 @@ none
 
 response code:
     
-`    200 - Okay`
+`200 - Okay`
 
 response body:
 ```
@@ -127,7 +127,7 @@ response body:
 
 response code: 
     
-`    404 - Not Found`
+`404 - Not Found`
 
 response body:
 ```
