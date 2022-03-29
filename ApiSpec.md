@@ -279,7 +279,6 @@ response body:
 request body:
 ```
 {
-    "meta": {},
     "data": {
         "username": "john_lewis",
         "password": "P@ssw0rd!"
@@ -360,7 +359,6 @@ headers:
 request body:
 ```
 {
-    "meta": {},
     "data": {
         "password": "passw3rd",
         "new_password": "P@ssw0rd"
@@ -436,7 +434,6 @@ response code:
 request body:
 ```
 {
-    "meta": {},
     "data": {
         "username": "johnnyBoi",
         "password": "p@ssw0rd"
