@@ -12,11 +12,22 @@ This is a proposal for my TODO API Spec
 ## TODO
 ```
 ID - Guid (PK)
+userID - GUID (FK)
+title - String
+created - DateTime
+due - DateTime
+completed - Bool
+```
 
+## Users
+```
+ID - GUID (PK)
+username - String
+password - String (Hash)
 ```
 
 # Data Models
-## Users:
+## Users
 ```
 ID - Guid
 Username - String
@@ -27,7 +38,7 @@ Todos - Todo []
 ## Todo:
 ```
 id - GUID
-user - User
+userID - GUID
 title - String
 created - DateTime
 due - DateTime
