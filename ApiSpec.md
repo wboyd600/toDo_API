@@ -52,7 +52,7 @@ Token - String (JWT)
 Expiration - DateTime
 ```
 
-# End Points
+# TODO End Points
 
 ## Create TODO
 `POST /todo`
@@ -289,6 +289,7 @@ response body:
 }
 ```
 
+# User Endpoints
 ## Create a User
 `POST /users`
 
