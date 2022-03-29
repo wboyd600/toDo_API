@@ -7,8 +7,13 @@ This is a proposal for my TODO API Spec
 - Todo - A task to completed by the user who owns it.
 - Session - A session represents an authenticated user session, and only one session per user can be active at a time.
 
-## Data Tables
+# Data Tables
 
+## TODO
+```
+ID - Guid (PK)
+
+```
 
 # Data Models
 ## Users:
@@ -153,7 +158,7 @@ none
 
 response code: 
     
-`    200 - Okay`
+`200 - Okay`
 
 response body:
 ```
@@ -180,7 +185,7 @@ response body:
 
 response code:
     
-`    400 - Bad request`
+`400 - Bad request`
 
 response body:
 ```
@@ -210,7 +215,7 @@ request body:
 
 response code:
     
-`    200 - Okay`
+`200 - Okay`
 
 response body:
 ```
@@ -225,7 +230,7 @@ response body:
 
 response code:
    
-`   4XX - Client error status codes`
+`4XX - Client error status codes`
 
 response body:
 ```
@@ -249,7 +254,7 @@ none
 
 response code:
     
-`    200 - Okay`
+`200 - Okay`
 
 response body:
 ```
@@ -264,7 +269,7 @@ response body:
 
 response code:
     
-`    404 - Not found`
+`404 - Not found`
 
 response body:
 ```
@@ -292,10 +297,7 @@ response code:
 response body:
 ```
 {
-    "meta": {
-        "success": "true",
-        "message": "Success"
-    }
+    "message": "Success"
 }
 ```
 
@@ -313,10 +315,7 @@ response code:
 response body:
 ```
 {
-    "meta": {
-        "success": "false",
-        "message": "Username already exists"
-    }
+    "message": "Username already exists"
 }
 ```
 
@@ -368,7 +367,7 @@ request body:
 
 response code:
 
-`204 no content` - The password was successfully updated
+`204 - No content` - The password was successfully updated
 
 response body:
 ```
@@ -377,19 +376,19 @@ none
 
 response code:
 
-`400 Bad request` - request payload format incorrect or {id} does not exist
+`400 - Bad request` - request payload format incorrect or {id} does not exist
 
 response code:
 
-`401 Unauthorized` - user hasn't been authenticated
+`401 - Unauthorized` - user hasn't been authenticated
 
 response code:
 
-`403 Forbidded` - user doesn't have permission to update user with this {id}
+`403 - Forbidden` - user doesn't have permission to update user with this {id}
 
 response code:
 
-`404 Not found` - user with id {id} does not exist
+`404 - Not found` - user with id {id} does not exist
 
 ## Delete a user
 `DELETE /users/{id}`
@@ -405,7 +404,7 @@ none
 
 response code:
 
-`204 no content` - The user was successfully deleted.
+`204 - no content` - The user was successfully deleted.
 
 response body:
 ```
@@ -414,19 +413,19 @@ none
 
 response code:
 
-`400 Bad request` - request payload format incorrect or {id} does not exist
+`400 - Bad request` - request payload format incorrect or {id} does not exist
 
 response code:
 
-`401 Unauthorized` - user hasn't been authenticated
+`401 - Unauthorized` - user hasn't been authenticated
 
 response code:
 
-`403 Forbidded` - user doesn't have permission to delete user with this {id}
+`403 - Forbidded` - user doesn't have permission to delete user with this {id}
 
 response code:
 
-`404 Not found` - user with id {id} does not exist
+`404 - Not found` - user with id {id} does not exist
 
 # Login
 `POST /login`
@@ -442,14 +441,12 @@ request body:
 ```
 
 response code:
-`200 Okay` - Successful login
+`200 - Okay` - Successful login
 
 response body:
 ```
 {
-    "meta": {
-        "success": true/false
-    },
+    "message": "success"
     "data": {
         "token": "eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9",
         "id": "3fad06ad-88f5-432d-b91d-0415fdddf016"
@@ -458,7 +455,7 @@ response body:
 ```
 
 response code:
-`400 Bad request` - Request payload in wrong format
+`400 - Bad request` - Request payload in wrong format
 
 response code:
-`404 not found` - A user with the given username / password could not be found.
+`404 - not found` - A user with the given username / password could not be found.
