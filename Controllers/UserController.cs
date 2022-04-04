@@ -1,10 +1,10 @@
 using toDo_API.Models;
 using Microsoft.AspNetCore.Mvc;
 using toDo_API.Repositories;
+using System.Text;
 namespace toDo_API.Controllers;
 
 [ApiController]
-[Route("users")]
 public class UserController : ControllerBase
 {
     private readonly IUserRepository _userRepository;
@@ -16,6 +16,7 @@ public class UserController : ControllerBase
     }
 
     [HttpGet]
+    [Route("users")]
     public async Task<ActionResult<IEnumerable<UserData>>> GetAll() {
         var results = await _userRepository.All(user => true);
         List<UserData> userDatas = new List<UserData>();
@@ -30,7 +31,8 @@ public class UserController : ControllerBase
     }
     
     [HttpPost]
-    public async Task<IActionResult> Create([FromBody]Login data)
+    [Route("users")]
+    public async Task<IActionResult> Create([FromBody]CreateUser data)
     {
 
         var user = new User();
@@ -42,24 +44,42 @@ public class UserController : ControllerBase
         } catch (InvalidOperationException e) {
             var message = new Message();
             message.message = e.Message;
-            var result = new ObjectResult(message) {
-                StatusCode = 409
-            };
-            return result;
+            return Conflict(message);
         }
         
         if (createdUser != null) {
             var message = new Message();
             message.message = "Success";
-
-            var result = new ObjectResult(message) {
-                StatusCode = 201
-            };
             var locationString = "/users/" + createdUser.Id.ToString();
-            Response.Headers.Add("Location", locationString);
-            return result;
+            IActionResult response = Created(locationString, message);
+            return response;
         } else {
             return BadRequest();
         }
+    }
+
+    [HttpPost]
+    [Route("login")]
+    public async Task<IActionResult> Login([FromBody]CreateUser data)
+    {
+        var user = new User();
+        user.Username = data.data.Username;
+        user.Password = data.data.Password;
+        User? loggedIn;
+        try {
+            loggedIn = await _userRepository.Login(user);
+        } catch (InvalidOperationException e) 
+        {
+            var message = new Message();
+            message.message = e.Message;
+            return Conflict(message);
+        }
+
+        if (loggedIn != null) {
+            var locationString = "/users/" + loggedIn.Id.ToString();
+            return NoContent();
+        }
+
+        return BadRequest();
     }
 }

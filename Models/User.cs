@@ -7,8 +7,9 @@ namespace toDo_API.Models
         public Guid Id { get; set; }
         public String Username { get; set; }
         public string Password { get; set; }
+        public string Salt { get; set; }
     }
-    public class Login {
+    public class CreateUser {
         public Data data { get; set; }
         public class Data {
             public String Username { get; set; }

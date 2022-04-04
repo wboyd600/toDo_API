@@ -2,10 +2,14 @@ using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using toDo_API.Models;
 using toDo_API.db;
+using toDo_API.Helpers;
+using System.Text;
 
 namespace toDo_API.Repositories
 {
-    public interface IUserRepository : IRepository<User, Guid> {}
+    public interface IUserRepository : IRepository<User, Guid> {
+        public Task<User?> Login(User entity);
+    }
 
         public class UserRepository : IUserRepository {
         private readonly ApplicationContext _context;
@@ -38,10 +42,28 @@ namespace toDo_API.Repositories
             }
             var newUser = new User();
             newUser.Username = entity.Username;
-            newUser.Password = entity.Password;
+            var salt = Helpers.Crypto.GenerateSalt();
+            newUser.Salt = salt;
+            newUser.Password = Helpers.Crypto.ComputeHash(entity.Password, salt);
+            
+            // newUser.salt
             var added = _dbSet.Add(newUser);
             await _context.SaveChangesAsync();
             return added.Entity;
+        }
+
+        public async Task<User?> Login(User entity) {
+            var currentUser = await Get(entity.Username);
+            if (currentUser == null) {
+                throw new InvalidOperationException("Username doesn't exist");
+            }
+            var salt = currentUser.Salt;
+            var validPassword = Helpers.Crypto.VerifyPassword(entity.Password, currentUser.Password, salt);
+            if (validPassword) {
+                return currentUser;
+            } else {
+                return null;
+            }
         }
 
         public Task<User?> Update(Guid index, User entity)
