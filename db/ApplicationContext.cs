@@ -17,6 +17,8 @@ namespace toDo_API.db {
 
         public DbSet<Todo> Todos { get; set; }
 
+        public DbSet<User> Users { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
             builder.UseNpgsql(_connectionString)

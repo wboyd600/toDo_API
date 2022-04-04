@@ -38,7 +38,7 @@ namespace toDo_API.Repositories
             return result.Entity;
         }
 
-         public async Task<Todo?> Get(params object[] values) {
+        public async Task<Todo?> Get(params object[] values) {
             return await _dbSet.FindAsync(values);
         }
 

@@ -2,7 +2,7 @@
     "driver": "pg",
     "host": "localhost",
     "port": 5432,
-    "database": "todos",
+    "database": "todos_app",
     "username": "postgres",
     "password": "password"
 }

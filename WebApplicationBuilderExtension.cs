@@ -21,6 +21,7 @@ namespace toDo_API
             builder.Services.AddScoped<ApplicationConfig>(provider => config);
             builder.Services.AddScoped<IGenericRepository, GenericRepository>();
             builder.Services.AddScoped<ITodoRepository, TodoRepository>();
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
         }
     }
 }
