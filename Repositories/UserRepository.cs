@@ -7,9 +7,7 @@ using System.Text;
 
 namespace toDo_API.Repositories
 {
-    public interface IUserRepository : IRepository<User, Guid> {
-        public Task<User?> Login(User entity);
-    }
+    public interface IUserRepository : IRepository<User, Guid> {}
 
         public class UserRepository : IUserRepository {
         private readonly ApplicationContext _context;
@@ -52,19 +50,19 @@ namespace toDo_API.Repositories
             return added.Entity;
         }
 
-        public async Task<User?> Login(User entity) {
-            var currentUser = await Get(entity.Username);
-            if (currentUser == null) {
-                throw new InvalidOperationException("Username doesn't exist");
-            }
-            var salt = currentUser.Salt;
-            var validPassword = Helpers.Crypto.VerifyPassword(entity.Password, currentUser.Password, salt);
-            if (validPassword) {
-                return currentUser;
-            } else {
-                return null;
-            }
-        }
+        // public async Task<User?> Login(User entity) {
+        //     var currentUser = await Get(entity.Username);
+        //     if (currentUser == null) {
+        //         throw new InvalidOperationException("Username doesn't exist");
+        //     }
+        //     var salt = currentUser.Salt;
+        //     var validPassword = Helpers.Crypto.VerifyPassword(entity.Password, currentUser.Password, salt);
+        //     if (validPassword) {
+        //         return currentUser;
+        //     } else {
+        //         return null;
+        //     }
+        // }
 
         public Task<User?> Update(Guid index, User entity)
         {

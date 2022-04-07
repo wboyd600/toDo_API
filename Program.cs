@@ -2,6 +2,7 @@ using toDo_API;
 using toDo_API.Models;
 using toDo_API.Repositories;
 using toDo_API.Controllers;
+using Microsoft.AspNetCore.Authentication;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,7 +25,7 @@ if (app.Environment.IsDevelopment())
 }
 
 // app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

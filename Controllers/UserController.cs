@@ -2,21 +2,28 @@ using toDo_API.Models;
 using Microsoft.AspNetCore.Mvc;
 using toDo_API.Repositories;
 using System.Text;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
+using Microsoft.IdentityModel.Tokens;
 namespace toDo_API.Controllers;
 
 [ApiController]
 public class UserController : ControllerBase
 {
     private readonly IUserRepository _userRepository;
+    private readonly IUserService _userService;
     public UserController(
-        IUserRepository userRepository
+        IUserRepository userRepository,
+        IUserService userService
     )
     {
         _userRepository = userRepository;
+        _userService = userService;
     }
 
     [HttpGet]
     [Route("users")]
+    [Authorize(Roles = "Admin")]
     public async Task<ActionResult<IEnumerable<UserData>>> GetAll() {
         var results = await _userRepository.All(user => true);
         List<UserData> userDatas = new List<UserData>();
@@ -34,7 +41,7 @@ public class UserController : ControllerBase
     [Route("users")]
     public async Task<IActionResult> Create([FromBody]CreateUser data)
     {
-
+        
         var user = new User();
         user.Username = data.data.Username;
         user.Password = data.data.Password;
@@ -65,21 +72,37 @@ public class UserController : ControllerBase
         var user = new User();
         user.Username = data.data.Username;
         user.Password = data.data.Password;
-        User? loggedIn;
-        try {
-            loggedIn = await _userRepository.Login(user);
-        } catch (InvalidOperationException e) 
-        {
+        var users = await _userRepository.All(i => i.Username == user.Username);
+        var currentUser = users.FirstOrDefault();
+
+        if (currentUser == null) {
             var message = new Message();
-            message.message = e.Message;
+            message.message = "Username doesn't exist";
             return Conflict(message);
         }
 
-        if (loggedIn != null) {
-            var locationString = "/users/" + loggedIn.Id.ToString();
-            return NoContent();
-        }
+        var salt = currentUser.Salt;
+        var validPassword = Helpers.Crypto.VerifyPassword(user.Password, currentUser.Password, salt);
 
-        return BadRequest();
+        if (validPassword) {
+            var jwt = Helpers.Crypto.CreateToken(currentUser);
+            var response = new LoginResponse();
+            response.message = "success";
+            var dataObject = new LoginResponse.Data();
+            dataObject.token = jwt;
+            dataObject.id = currentUser.Id;
+            response.data = dataObject;
+            return Ok(response);
+        } else {
+            return NotFound();
+        }
+    }
+
+    [HttpGet, Authorize]
+    [Route("me")]
+    public ActionResult<string> GetMet()
+    {
+        var userName = _userService.GetMyName();
+        return Ok(userName);
     }
 }
