@@ -23,7 +23,7 @@ public class UserController : ControllerBase
 
     [HttpGet]
     [Route("users")]
-    [Authorize(Roles = "Admin")]
+    // [Authorize(Roles = "Admin")]
     public async Task<ActionResult<IEnumerable<UserData>>> GetAll() {
         var results = await _userRepository.All(user => true);
         List<UserData> userDatas = new List<UserData>();
@@ -98,11 +98,20 @@ public class UserController : ControllerBase
         }
     }
 
-    [HttpGet, Authorize]
-    [Route("me")]
-    public ActionResult<string> GetMet()
-    {
-        var userName = _userService.GetMyName();
-        return Ok(userName);
+    [HttpDelete]
+    [Route("users/{id}")]
+    [Authorize]
+    public async Task<IActionResult> Delete(Guid id) {
+        var currentUser = new Guid(_userService.GetMyID());
+        if (currentUser != id) {
+            return Forbid();
+        }
+
+        var user = await _userRepository.Delete(currentUser);
+        if (user != null) {
+            return NoContent();
+        }
+
+        return NotFound();
     }
 }

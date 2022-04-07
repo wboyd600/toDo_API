@@ -50,28 +50,18 @@ namespace toDo_API.Repositories
             return added.Entity;
         }
 
-        // public async Task<User?> Login(User entity) {
-        //     var currentUser = await Get(entity.Username);
-        //     if (currentUser == null) {
-        //         throw new InvalidOperationException("Username doesn't exist");
-        //     }
-        //     var salt = currentUser.Salt;
-        //     var validPassword = Helpers.Crypto.VerifyPassword(entity.Password, currentUser.Password, salt);
-        //     if (validPassword) {
-        //         return currentUser;
-        //     } else {
-        //         return null;
-        //     }
-        // }
-
         public Task<User?> Update(Guid index, User entity)
         {
             throw new NotImplementedException();
         }
 
-        public Task<User?> Delete(Guid index)
+        public async Task<User?> Delete(Guid index)
         {
-            throw new NotImplementedException();
+            var result = _dbSet.Remove(new User { Id = index });
+
+            await _context.SaveChangesAsync();
+
+            return result.Entity;
         }
     }
 }

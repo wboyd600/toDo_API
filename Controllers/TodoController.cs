@@ -1,6 +1,7 @@
 using toDo_API.Models;
 using Microsoft.AspNetCore.Mvc;
 using toDo_API.Repositories;
+using Microsoft.AspNetCore.Authorization;
 namespace toDo_API.Controllers;
 
 [ApiController]
@@ -8,32 +9,45 @@ namespace toDo_API.Controllers;
 public class TodoController : ControllerBase
 {
     private readonly ITodoRepository _todoRepository;
+    private readonly IUserService _userService;
     public TodoController(
-        ITodoRepository todoRepository
+        ITodoRepository todoRepository,
+        IUserService userService
     )
     {
         _todoRepository = todoRepository;
+        _userService = userService;
     }
 
     [HttpGet]
+    [Authorize]
     public async Task<ActionResult<IEnumerable<Todo>>> GetAll() {
-        var results = await _todoRepository.All(todo => true);
+        var userID = new Guid(_userService.GetMyID());
+        var results = await _todoRepository.All(todo => todo.userid == userID);
         return results.ToList();
     }
 
     [HttpGet("{id}")]
+    [Authorize]
     public async Task<ActionResult<Todo>> Get(Guid id) {
         var todo = await _todoRepository.Get(id);
+        var userID = new Guid(_userService.GetMyID());
 
-        if (todo is null)
+        if (todo is null || userID != todo.userid)
             return NotFound();
 
         return Ok(todo);
     }
 
     [HttpPost]
-    public async Task<ActionResult<Todo>> Create([FromBody]Todo todo)
+    [Authorize]
+    public async Task<ActionResult<Todo>> Create([FromBody]NewTodoRequestBody newTodo)
     {
+        var todo = new Todo();
+        todo.userid = new Guid(_userService.GetMyID());
+        todo.Completed = newTodo.Completed;
+        todo.Title = newTodo.Title;
+        todo.Due = newTodo.Due;
         var createdTodo = await _todoRepository.Create(todo);
         return createdTodo;
     }
@@ -51,8 +65,14 @@ public class TodoController : ControllerBase
     }
 
     [HttpDelete("{id}")]
+    [Authorize]
     public async Task<ActionResult<Todo>> Delete(Guid id)
     {
+        var todo = await _todoRepository.Get(id);
+        var userID = new Guid(_userService.GetMyID());
+        if (todo is null || userID != todo.userid)
+            return NotFound();
+
         var result = await _todoRepository.Delete(id);
         
         if (result is null) {
