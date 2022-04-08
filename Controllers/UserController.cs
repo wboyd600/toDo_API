@@ -78,7 +78,7 @@ public class UserController : ControllerBase
         if (currentUser == null) {
             var message = new Message();
             message.message = "Username doesn't exist";
-            return Conflict(message);
+            return NotFound(message);
         }
 
         var salt = currentUser.Salt;
