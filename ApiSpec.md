@@ -470,4 +470,11 @@ response code:
 `400 - Bad request` - Request payload in wrong format
 
 response code:
-`404 - not found` - A user with the given username / password could not be found.
+`401 - Conflict` - A user with the given username / password could not be found.
+
+response body:
+```
+{
+    "message": "Invalid username or password"
+}
+```
