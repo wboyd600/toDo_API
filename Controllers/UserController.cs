@@ -75,10 +75,12 @@ public class UserController : ControllerBase
         var users = await _userRepository.All(i => i.Username == user.Username);
         var currentUser = users.FirstOrDefault();
 
+        // Response for invalid username or passwords
+        var message = new Message();
+        message.message = "Invalid username or password";
+
         if (currentUser == null) {
-            var message = new Message();
-            message.message = "Username doesn't exist";
-            return NotFound(message);
+            return Unauthorized(message);
         }
 
         var salt = currentUser.Salt;
@@ -94,7 +96,7 @@ public class UserController : ControllerBase
             response.data = dataObject;
             return Ok(response);
         } else {
-            return NotFound();
+            return Unauthorized(message);
         }
     }
 
