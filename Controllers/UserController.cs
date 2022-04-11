@@ -32,9 +32,7 @@ public class UserController : ControllerBase
         List<UserData> userDatas = new List<UserData>();
         foreach (User user in results) 
         {
-            var userData = new UserData();
-            userData.Username = user.Username;
-            userData.Id = user.Id;
+            var userData = new UserData(user.Id, user.Username);
             userDatas.Add(userData);
         }
         return userDatas;
@@ -52,14 +50,12 @@ public class UserController : ControllerBase
         try {
             createdUser = await _userRepository.Create(user);
         } catch (InvalidOperationException e) {
-            var message = new Message();
-            message.message = e.Message;
+            var message = new Message(e.Message);
             return Conflict(message);
         }
         
         if (createdUser != null) {
-            var message = new Message();
-            message.message = "Success";
+            var message = new Message("Success");
             var locationString = "/users/" + createdUser.Id.ToString();
             IActionResult response = Created(locationString, message);
             return response;
@@ -79,8 +75,7 @@ public class UserController : ControllerBase
         var currentUser = users.FirstOrDefault();
 
         // Response for invalid username or passwords
-        var message = new Message();
-        message.message = "Invalid username or password";
+        var message = new Message("Invalid username or password");
 
         if (currentUser == null) {
             return Unauthorized(message);
