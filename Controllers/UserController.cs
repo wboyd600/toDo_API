@@ -86,12 +86,7 @@ public class UserController : ControllerBase
 
         if (validPassword) {
             var jwt = Helpers.Crypto.CreateToken(currentUser, secretKey);
-            var response = new LoginResponse();
-            response.message = "success";
-            var dataObject = new LoginResponse.Data();
-            dataObject.token = jwt;
-            dataObject.id = currentUser.Id;
-            response.data = dataObject;
+            var response = new LoginResponse("success", jwt, currentUser.Id);
             return Ok(response);
         } else {
             return Unauthorized(message);
