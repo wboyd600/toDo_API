@@ -12,13 +12,16 @@ public class UserController : ControllerBase
 {
     private readonly IUserRepository _userRepository;
     private readonly IUserService _userService;
+    private readonly string secretKey;
     public UserController(
         IUserRepository userRepository,
-        IUserService userService
+        IUserService userService,
+        ApplicationConfig applicationConfig
     )
     {
         _userRepository = userRepository;
         _userService = userService;
+        secretKey = applicationConfig.Key;
     }
 
     [HttpGet]
@@ -87,7 +90,7 @@ public class UserController : ControllerBase
         var validPassword = Helpers.Crypto.VerifyPassword(user.Password, currentUser.Password, salt);
 
         if (validPassword) {
-            var jwt = Helpers.Crypto.CreateToken(currentUser);
+            var jwt = Helpers.Crypto.CreateToken(currentUser, secretKey);
             var response = new LoginResponse();
             response.message = "success";
             var dataObject = new LoginResponse.Data();

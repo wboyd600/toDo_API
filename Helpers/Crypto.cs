@@ -26,13 +26,20 @@ namespace toDo_API.Helpers {
             return salt;
         }
 
-        public static bool VerifyPassword(string enteredPassword, string storedHash, string storedSalt)
+        public static bool VerifyPassword(
+            string enteredPassword, 
+            string storedHash, 
+            string storedSalt
+        )
         {
             var rfc2898DeriveBytes = new Rfc2898DeriveBytes(Encoding.UTF8.GetBytes(enteredPassword), Encoding.UTF8.GetBytes(storedSalt), 10000);
             return Convert.ToBase64String(rfc2898DeriveBytes.GetBytes(256)) == storedHash;
         }
 
-        public static string CreateToken(User user) 
+        public static string CreateToken(
+            User user, 
+            string secretKey
+        ) 
         {
             List<Claim> claims = new List<Claim>
             {
@@ -41,7 +48,7 @@ namespace toDo_API.Helpers {
             };
 
             var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(
-                "my secret key ntasdfhkjasdjkhflasdfhjkdsfahjkl"
+                secretKey
             ));
             var cred = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
 
