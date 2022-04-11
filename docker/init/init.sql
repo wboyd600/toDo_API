@@ -15,5 +15,6 @@ CREATE DATABASE todos_app;
 --     created timestamptz NOT NULL,
 --     due timestamptz NOT NULL,
 --     completed BOOLEAN NOT NULL,
---     FOREIGN KEY (userID) references users
+--     FOREIGN KEY (userID) references users(id)
 -- );
+
