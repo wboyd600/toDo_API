@@ -18,3 +18,7 @@ CREATE DATABASE todos_app;
 --     FOREIGN KEY (userID) references users(id)
 -- );
 
+-- ALTER TABLE public.todos
+-- ADD CONSTRAINT todos_userid_fkey
+-- foreign key (userid)
+-- references public.users(id) on delete cascade;
