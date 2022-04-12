@@ -27,15 +27,9 @@ public class UserController : ControllerBase
     [HttpGet]
     [Route("users")]
     [Authorize(Roles = "admin")]
-    public async Task<ActionResult<IEnumerable<UserData>>> GetAll() {
+    public async Task<ActionResult<IEnumerable<User>>> GetAll() {
         var results = await _userRepository.All(user => true);
-        List<UserData> userDatas = new List<UserData>();
-        foreach (User user in results) 
-        {
-            var userData = new UserData(user.Id, user.Username);
-            userDatas.Add(userData);
-        }
-        return userDatas;
+        return results.ToList();
     }
     
     [HttpPost]

@@ -19,20 +19,6 @@ namespace toDo_API.Models
         }
     }
 
-    public class UserData
-    {
-        public UserData(
-            Guid id,
-            string username
-        ) 
-        {
-            this.Id = id;
-            this.Username = username;
-        }
-        public Guid Id { get; set; }
-        public string Username { get; set; }
-    }
-
     public class Message
     {
         public Message(String message) 
