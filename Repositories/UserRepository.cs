@@ -40,6 +40,7 @@ namespace toDo_API.Repositories
             }
             var newUser = new User();
             newUser.Username = entity.Username;
+            newUser.Role = (int)Role.user;
             var salt = Helpers.Crypto.GenerateSalt();
             newUser.Salt = salt;
             newUser.Password = Helpers.Crypto.ComputeHash(entity.Password, salt);

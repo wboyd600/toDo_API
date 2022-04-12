@@ -43,9 +43,16 @@ namespace toDo_API.Helpers {
         {
             List<Claim> claims = new List<Claim>
             {
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim(ClaimTypes.Role, "Username")
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
             };
+
+            var claim = "user";
+
+            if (user.Role == (int)Role.admin) 
+            {
+                claim = "admin";
+            }
+            claims.Add(new Claim(ClaimTypes.Role, claim));
 
             var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(
                 secretKey

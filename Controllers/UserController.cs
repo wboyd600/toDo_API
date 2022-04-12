@@ -26,7 +26,7 @@ public class UserController : ControllerBase
 
     [HttpGet]
     [Route("users")]
-    // [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "admin")]
     public async Task<ActionResult<IEnumerable<UserData>>> GetAll() {
         var results = await _userRepository.All(user => true);
         List<UserData> userDatas = new List<UserData>();
