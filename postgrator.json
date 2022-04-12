@@ -1,4 +1,5 @@
 {
+    "migrationPattern": "migrations/*",
     "driver": "pg",
     "host": "localhost",
     "port": 5432,
