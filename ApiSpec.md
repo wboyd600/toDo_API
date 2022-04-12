@@ -333,6 +333,7 @@ response body:
 
 ## Fetch users
 `GET /users`
+REQUIRES ADMIN PRIVELEGES
 
 request body:
 ```
@@ -347,14 +348,20 @@ response body:
 ```
 {
     [
-        {
-            id: "3fad06ad-88f5-432d-b91d-0415fdddf015",
-            username: "johnny_boi"
-        },
-        {
-            id: "3fad06ad-88f5-432d-b91d-0415fdddf016",
-            username: "johnny_dog"
-        },
+    {
+        "id": "454599c3-bb17-4412-a152-0d338435ed27",
+        "username": "wanny10",
+        "password": "IUTwSZBwCwc3ckHOEVZcFrKrhZVf0z5hjAn8yTORmZ7Ve/opLu6PlBL+IHf3gVeynGm6N4qfGPDX/ggjvGk4OX2UpjX7b8AtlYQDXNp/vX/h07hU/VaLxE3EMFTq463Z26sUGPTD7QfTSpWon4spyScx5N5isOkaySfE65KKH1+g/ixUUBa+eVIfy2k4xJXBWyGlCrhKYqoCCRv4CVUroDN1gH3AkNXNuM2XPNYHirpnQEeB9hoEquHdR4Qs1vk92xa7Zv7SGGv40xB7UyAI7spIGGE8+8CCNYRLo4c2lFsccs7XSaUHfXd2c8uDFvEnLNf3qTyy0xiWE/9//T551g==",
+        "salt": "dk35EuJdYzQ=",
+        "role": 0
+    },
+    {
+        "id": "5f455509-03ab-4f40-b448-5332b3cb9498",
+        "username": "admin",
+        "password": "0RJ0Pb9ixTXuGDbF/rWYFXoQkggqdwVHEpxlTba3lSqx71wwMb86Ed+GktJRB01xnrjEgVZgxa8uW0gWNxsQiPmqD3+4FSANL2duulfydYFgWGqj96fXM29zmhko+WOfZW5kcYzRE7C+2dJwtwQh///ddAU1cbNCvgXhkU6FZUs4iJ93/ZtU+WsVDKKlL6CfDWaLmKAHZ1qsRUUhH2KM4Vv6pBOUaldQi3qatQHrPTttOfVH9fkQKhFQl12bTbvhN0l/axHUFE0vPi1gz7wdqquE7zXpfY1eYjOuqJNz7XBWYncK5jM4IPCojVy5XPL7//dLZ04Xg1QqHBnQv6M5+g==",
+        "salt": "vFa9dGrM3do=",
+        "role": 1
+    },
         ...
     ]
 }
